@@ -15,10 +15,8 @@ torch = 1.2.0
 torchvision = 0.4.0
 scikit-learn >= 0.2
 tensorbard >= 2.0.0
-
-## How to cite
-
 ```
+## How to cite
 @inproceedings{huang2021snapmix,
     title={Few-shot Font Generation with Localized Style Representations and Factorization},
     author={Shaoli Huang, Xinchao Wang, and Dacheng Dao},

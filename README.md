@@ -19,7 +19,7 @@ tensorbard >= 2.0.0
 ## How to cite
 ```
 @inproceedings{huang2021snapmix,
-    title={Few-shot Font Generation with Localized Style Representations and Factorization},
+    title={SnapMix: Semantically Proportional Mixing for Augmenting Fine-grained Data},
     author={Shaoli Huang, Xinchao Wang, and Dacheng Dao},
     year={2021},
     booktitle={AAAI Conference on Artificial Intelligence},

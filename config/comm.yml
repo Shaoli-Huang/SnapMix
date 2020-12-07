@@ -1,0 +1,13 @@
+
+exp_name: snapmix
+train_proc: comm
+test_proc: comm
+
+prams_group: ['ftlayer','freshlayer']
+lr_group: [0.001,0.01]
+lrstep: [80,150,180]
+lrgamma: 0.1
+
+criterion: CrossEntropyLoss
+reduction: none
+warp: True

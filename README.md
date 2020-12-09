@@ -1,6 +1,6 @@
 # SnapMix: Semantically Proportional Mixing for Augmenting Fine-grained Data (AAAI 2021)
 
- PyTorch implementation of SnapMix | [paper](https://)
+PyTorch implementation of SnapMix | [paper](https://)
 
 ## Method Overview
 

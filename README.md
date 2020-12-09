@@ -6,7 +6,7 @@ Official PyTorch implementation of SnapMix | [paper](https://)
 
 ![SnapMix](./imgs/overview.jpg)
 
-## How to cite
+## Cite
 ```
 @inproceedings{huang2021snapmix,
     title={SnapMix: Semantically Proportional Mixing for Augmenting Fine-grained Data},
@@ -44,6 +44,28 @@ ln -s /your-path-to/Aircraft-dataset data/aircraft
 ## Training
 
 ### Training with Imagenet pre-trained weights
+
+|  Backbone | Method | CUB   | Car    |   Aircraft |  
+|:--------|:--------|--------:|------:|--------:|
+|Resnet-18 | Baseline| 82.35% |  91.15% | 87.80% |  
+|Resnet-18 | Baseline + SnapMix| 84.29% |  93.12% | 90.17% |
+|Resnet-34 | Baseline| 84.98% |  92.02% | 89.92% |  
+|Resnet-34 | Baseline + SnapMix| 87.06% |  93.95% | 92.36% |
+|Resnet-50 | Baseline| 85.49% |  93.04% | 91.07% |  
+|Resnet-50 | Baseline + SnapMix| 87.75% |  94.30% | 92.08% |
+|Resnet-101 | Baseline| 85.62% |  93.09% | 91.59% |  
+|Resnet-101 | Baseline + SnapMix| 88.45% |  94.44% | 93.74% |
+|Resnet-50 | Baseline+| 87.13% |  93.80% | 91.68% |  
+|Resnet-50 | Baseline+ + SnapMix| 88.70% |  95.00% | 93.24% |
+|Resnet-101 | Baseline+| 87.81% |  93.94% | 91.85% |  
+|Resnet-101 | Baseline+ + SnapMix| 89.32% |  94.84% | 94.05% |
+
+|  Backbone | Method | CUB   | 
+|:--------|:--------|--------:|
+|InceptionV3 | Baseline| 82.22% |
+|InceptionV3 | Baseline + SnapMix| 85.54%|
+|DenseNet121 | Baseline| 84.23% |  
+|DenseNet121| Baseline + SnapMix| 87.42%|
 
 ***1. Baseline and Baseline+***
 
@@ -83,6 +105,15 @@ Applying other augmentation methods (currently support cutmix,cutout,and mixup) 
 ```python main.py --mixmethod mixup --prob 0.5 --depth 50 --dataset cub ```  # training with MixUp
 
 ### Training from scratch
+|  Backbone | Method | CUB   | 
+|:--------|:--------|--------:|
+|Resnet-18 | Baseline| 64.98% |
+|Resnet-18 | Baseline + SnapMix| 70.31%|
+|Resnet-50 | Baseline| 84.23% |  
+|Resnet-50| Baseline + SnapMix| 72.17%|
+
+
+
 ```python main.py --mixmethod snapmix --prob 0.5 --depth 18 --dataset cub --pretrained 0``` # resnet-18 backbone
 
 ```python main.py --mixmethod snapmix --prob 0.5 --depth 50 --dataset cub --pretrained 0 ``` # resnet-50 backbone

@@ -121,6 +121,6 @@ To train a model without using ImageNet pretrained weights:
 |:--------|:--------|--------:|
 |Resnet-18 | Baseline| 64.98% |
 |Resnet-18 | Baseline + SnapMix| 70.31%|
-|Resnet-50 | Baseline| 84.23% |  
+|Resnet-50 | Baseline| 66.92% |  
 |Resnet-50| Baseline + SnapMix| 72.17%|
 

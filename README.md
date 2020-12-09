@@ -19,7 +19,6 @@ PyTorch implementation of SnapMix | [paper](https://)
 ## Setup
 ### Install Package Dependencies
 ```
-
 torch
 torchvision 
 PyYAML

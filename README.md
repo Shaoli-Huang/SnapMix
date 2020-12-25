@@ -89,7 +89,7 @@ Applying other augmentation methods (currently support cutmix,cutout,and mixup) 
 
 ***3. Results***
 
-***Results with ResNet architecture.***
+***ResNet architecture.***
 
 |  Backbone | Method | CUB   | Car    |   Aircraft |  
 |:--------|:--------|--------:|------:|--------:|
@@ -107,7 +107,7 @@ Applying other augmentation methods (currently support cutmix,cutout,and mixup) 
 |Resnet-101 | Baseline+ + SnapMix| 89.32% |  94.84% | 94.05% |
 
 
-***Results with InceptionV3 architecture.***
+***InceptionV3 architecture.***
 
 |  Backbone | Method | CUB   | 
 |:--------|:--------|--------:|
@@ -115,7 +115,7 @@ Applying other augmentation methods (currently support cutmix,cutout,and mixup) 
 |InceptionV3 | Baseline + SnapMix| 85.54%|
 
 
-***Results with DenseNet architecture.***
+***DenseNet architecture.***
 
 |  Backbone | Method | CUB   | 
 |:--------|:--------|--------:|

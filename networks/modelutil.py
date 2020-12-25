@@ -11,7 +11,7 @@ def get_model(conf):
     elif 'inception' in conf.netname:
         net_type = 'inception_ft'
     elif 'efficient' in conf.netname:
-        net_type = 'efficientnaet_ft'
+        net_type = 'efficientnet_ft'
     else:
         print('{} type not support'.format(conf.netname))
 

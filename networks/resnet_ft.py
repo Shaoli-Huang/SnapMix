@@ -16,7 +16,7 @@ class ResNet(nn.Module):
 
     def __init__(self,conf):
         super(ResNet, self).__init__()
-        basenet = eval('models.resnet'+str(conf.depth))(pretrained=conf.pretrained)
+        basenet = eval('models.'+conf.netname)(pretrained=conf.pretrained)
         self.conv3 = nn.Sequential(*list(basenet.children())[:-4])
         self.conv4 = list(basenet.children())[-4]
         self.midlevel = False
@@ -27,23 +27,18 @@ class ResNet(nn.Module):
             self.isdetach = isdetacjh
 
         mid_dim = 1024
-        if conf.depth == 18:
+        feadim = 2048
+        if conf.netname in ['resnet18','resnet34']:
             mid_dim = 256
+            feadim = 512
+
         if self.midlevel:
             self.mcls = nn.Linear(mid_dim, conf.num_class)
             self.max_pool = nn.AdaptiveMaxPool2d((1, 1))
             self.conv4_1 = nn.Sequential(nn.Conv2d(mid_dim, mid_dim, 1, 1), nn.ReLU())
         self.conv5 = list(basenet.children())[-3]
-        if conf.depth < 50:
-            feadim = 512
-        else:
-            feadim = 2048
         self.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
-        if 'imagenet_cls' in conf:
-            self.classifier = list(basenet.children())[-1]
-
-        else:
-            self.classifier = nn.Linear(feadim, conf.num_class)
+        self.classifier = nn.Linear(feadim, conf.num_class)
 
     def set_detach(self,isdetach=True):
         self.isdetach = isdetach
@@ -66,12 +61,8 @@ class ResNet(nn.Module):
         else:
             mlogits = None
 
-
-
         return logits,x.detach(),mlogits
 
-        #results = {'logit': [logits]}
-        #return results
 
     def _init_weight(self, block):
         for m in block.modules():
@@ -93,4 +84,3 @@ class ResNet(nn.Module):
 
 def get_net(conf):
     return ResNet(conf)
-    #return ResNet(conf.depth, conf.num_class, conf.pretrained,conf.midlevel)

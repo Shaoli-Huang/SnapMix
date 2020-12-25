@@ -15,7 +15,7 @@ def get_spm(input,target,conf,model):
     bs = input.size(0)
     with torch.no_grad():
         output,fms,_ = model(input)
-        if 'inception' in conf.net_type:
+        if 'inception' in conf.netname:
             clsw = model.module.fc
         else:
             clsw = model.module.classifier

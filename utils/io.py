@@ -13,19 +13,15 @@ def load_checkpoint(model, pth_file):
     print('==> Reading from model checkpoint..')
     assert os.path.isfile(pth_file), 'Error: no model checkpoint directory found!'
     checkpoint = torch.load(pth_file)
-    # args.start_epoch = checkpoint['epoch']
-    # best_prec1 = checkpoint['best_prec1']
 
     pretrained_dict = checkpoint['state_dict']
     model_dict = model.module.state_dict()
     model_dict.update(pretrained_dict)
 
-    # model.module.load_state_dict(checkpoint['state_dict'])
     model.module.load_state_dict(model_dict)
     print("=> loaded model checkpoint '{}' (epoch {})"
             .format(pth_file, checkpoint['epoch']))
 
-    # results = {'model': model, 'checkpoint': checkpoint}
     return checkpoint
 
 
@@ -42,7 +38,6 @@ def save_checkpoint(state, is_best=False, outdir='checkpoint', filename='checkpo
         savepath = filepath
     torch.save(state, savepath)
     if is_best:
-        #torch.save(state, os.path.join(outdir, 'model_best.pth.tar'))
         shutil.copyfile(savepath, os.path.join(outdir, 'model_best.pth.tar'))
 
 
@@ -56,7 +51,7 @@ def set_outdir(conf):
             conf.net_type+'_'+conf.dataset,timestr)
     else:
         outdir = os.path.join(default_outdir,conf.exp_name, \
-            conf.net_type+str(conf.depth)+'_'+conf.dataset)
+            conf.netname+'_'+conf.dataset)
 
         prefix = 'bs_'+str(conf.batch_size)+'seed_'+str(conf.seed)
 

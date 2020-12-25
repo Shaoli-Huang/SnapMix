@@ -12,17 +12,16 @@ import torchvision
 from torchvision import models
 import pdb
 
+dimdict = {'densenet121':1024,'densenet201':1920}
+
 class DenseNet(nn.Module):
 
     def __init__(self,depth,num_class,pretrained=True):
         super(DenseNet, self).__init__()
-        basenet = eval('models.densenet'+str(depth))(pretrained=pretrained)
+        basenet = eval('models.'+conf.netname)(pretrained=pretrained)
         self.feature = nn.Sequential(*list(basenet.children())[:-1])
         self.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
-        if depth == 121:
-            indim = 1024
-        else:
-            indim = 1920
+        indim = dimdict[conf.netname]
         self.classifier = nn.Linear(indim, num_class)
 
     def set_detach(self,isdetach):

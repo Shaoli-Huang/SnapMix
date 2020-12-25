@@ -132,7 +132,7 @@ def set_env(cfg):
 
 # ----------------------------------------------------------------------------------------
 # base
-parser.add_argument('-j', '--workers', default=36, type=int, metavar='N', help='number of data loading workers (default: 4)')
+parser.add_argument('-j', '--workers', default=16, type=int, metavar='N', help='number of data loading workers (default: 4)')
 parser.add_argument('-b', '--batch_size', default=16, type=int, metavar='N', help='mini-batch size (default: 64)')
 parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
 parser.add_argument('--weightfile', default=None, type=str, metavar='PATH', help='path to model (default: none)')
@@ -152,10 +152,9 @@ parser.add_argument('--pretrained', default=1, type=float, help='loss weights')
 # others
 
 parser.add_argument('--mixmethod', default='baseline', type=str, help='config files')
-parser.add_argument('--net_type', default='resnet_ft', type=str, help='config files')
+parser.add_argument('--netname', default='resnet50', type=str, help='config files')
 parser.add_argument('--prob', type=float, default=1.0, help='')
 parser.add_argument('--beta', type=float, default=1.0, help='')
-parser.add_argument('--depth', default=50, type=int, metavar='N', help='network depth')
 parser.add_argument('--dataset', default='cub', type=str, help='dataset')
 parser.add_argument('--cropsize', default=448, type=int, metavar='N', help='cropsize')
 parser.add_argument( '--midlevel', dest='midlevel', action='store_true', help='midlevel')

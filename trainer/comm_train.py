@@ -49,7 +49,7 @@ def train(train_loader, model, criterion, optimizer, conf,wmodel=None):
             loss_b = criterion(output, target_b)
             loss = torch.mean(loss_a* lam_a + loss_b* lam_b)
 
-            if 'inception' in conf.net_type:
+            if 'inception' in conf.netname:
                 loss1_a = criterion(moutput, target_a)
                 loss1_b = criterion(moutput, target_b)
                 loss1 = torch.mean(loss1_a* lam_a + loss1_b* lam_b)
@@ -64,7 +64,7 @@ def train(train_loader, model, criterion, optimizer, conf,wmodel=None):
             output,_,moutput = model(input)
             loss = torch.mean(criterion(output, target))
 
-            if 'inception' in conf.net_type:
+            if 'inception' in conf.netname:
                 loss += 0.4*torch.mean(criterion(moutput,target))
 
             if 'midlevel' in conf:
@@ -83,7 +83,5 @@ def train(train_loader, model, criterion, optimizer, conf,wmodel=None):
         end = time.time()
 
         pbar.set_postfix(batch_time=batch_time.value(), data_time=data_time.value(), loss=losses.value(), score=0)
-
-
 
     return losses.value()

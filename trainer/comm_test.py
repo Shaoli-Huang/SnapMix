@@ -34,7 +34,7 @@ def validate(train_loader, model, criterion, conf):
         input = input.cuda()
         target = target.cuda()
 
-        if 'inception' in conf.net_type:
+        if 'inception' in conf.netname:
             output = model(input)
         else:
             output,_,moutput = model(input)

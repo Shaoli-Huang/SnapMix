@@ -25,6 +25,7 @@ PyYAML
 easydict
 tqdm
 scikit-learn
+efficientnet_pytorch
 pandas
 opencv
 ```
@@ -59,34 +60,36 @@ To train a model on CUB dataset using the Resnet-50 backbone,
 
 To train model on other datasets using other network backbones, you can specify the following arguments: 
 
-``` --net_type: name of network type. {inceptionv3_ft,resnet_ft,densenet_ft} ```
-
-``` --depth: network depth,e.g., {18,34,50,101} for resnet architecture ```
+``` --netname: name of network architectures (support 4 network families: ResNet,DenseNet,InceptionV3,EfficientNet) ```
 
 ``` --dataset: dataset name```
 
 For example, 
 
-``` python main.py --depth 18 --dataset car ```   # using the Resnet-18 backbone on Car dataset
+``` python main.py --netname resnet18 --dataset cub ```   # using the Resnet-18 backbone on CUB dataset
 
-``` python main.py --net_type inceptionv3_ft --dataset aircraft ```  # using the inceptionV3 backbone on Aircraft dataset
+``` python main.py --netname efficientnet-b0 --dataset cub ```   # using the EfficientNet-b0 backbone on CUB dataset
+
+``` python main.py --netname inceptoinV3 --dataset aircraft ```  # using the inceptionV3 backbone on Aircraft dataset
 
 
 ***2. Training with mixing augmentation***
 
 Applying SnapMix in training ( we used the hyperparameter values (prob=1., beta=5) for SnapMix in most of the experiments.):
 
-```python main.py --mixmethod snapmix --beta 5 --depth 50 --dataset cub ``` # baseline 
+```python main.py --mixmethod snapmix --beta 5 --netname resnet50 --dataset cub ``` # baseline 
 
-```python main.py --mixmethod snapmix --beta 5 --depth 50 --dataset cub --midlevel ``` # baseline+ 
+```python main.py --mixmethod snapmix --beta 5 --netname resnet50 --dataset cub --midlevel ``` # baseline+ 
 
 Applying other augmentation methods (currently support cutmix,cutout,and mixup) in training:
 
-```python main.py --mixmethod cutmix --beta 3 --depth 50 --dataset cub ```   # training with CutMix
+```python main.py --mixmethod cutmix --beta 3 --netname resnet50 --dataset cub ```   # training with CutMix
 
-```python main.py --mixmethod mixup --prob 0.5 --depth 50 --dataset cub ```  # training with MixUp
+```python main.py --mixmethod mixup --prob 0.5 --netname resnet50 --dataset cub ```  # training with MixUp
 
 ***3. Results***
+
+***Results with ResNet architecture.***
 
 |  Backbone | Method | CUB   | Car    |   Aircraft |  
 |:--------|:--------|--------:|------:|--------:|
@@ -103,20 +106,30 @@ Applying other augmentation methods (currently support cutmix,cutout,and mixup) 
 |Resnet-101 | Baseline+| 87.81% |  93.94% | 91.85% |  
 |Resnet-101 | Baseline+ + SnapMix| 89.32% |  94.84% | 94.05% |
 
+
+***Results with InceptionV3 architecture.***
+
 |  Backbone | Method | CUB   | 
 |:--------|:--------|--------:|
 |InceptionV3 | Baseline| 82.22% |
 |InceptionV3 | Baseline + SnapMix| 85.54%|
+
+
+***Results with DenseNet architecture.***
+
+|  Backbone | Method | CUB   | 
+|:--------|:--------|--------:|
 |DenseNet121 | Baseline| 84.23% |  
 |DenseNet121| Baseline + SnapMix| 87.42%|
+
 
 ### Training from scratch
 
 To train a model without using ImageNet pretrained weights:
 
-```python main.py --mixmethod snapmix --prob 0.5 --depth 18 --dataset cub --pretrained 0``` # resnet-18 backbone
+```python main.py --mixmethod snapmix --prob 0.5 --netname resnet18 --dataset cub --pretrained 0``` # resnet-18 backbone
 
-```python main.py --mixmethod snapmix --prob 0.5 --depth 50 --dataset cub --pretrained 0 ``` # resnet-50 backbone
+```python main.py --mixmethod snapmix --prob 0.5 --netname resnet50 --dataset cub --pretrained 0 ``` # resnet-50 backbone
 
 ***2. Results***
 
@@ -126,4 +139,3 @@ To train a model without using ImageNet pretrained weights:
 |Resnet-18 | Baseline + SnapMix| 70.31%|
 |Resnet-50 | Baseline| 66.92% |  
 |Resnet-50| Baseline + SnapMix| 72.17%|
-

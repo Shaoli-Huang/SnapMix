@@ -16,13 +16,13 @@ dimdict = {'densenet121':1024,'densenet201':1920}
 
 class DenseNet(nn.Module):
 
-    def __init__(self,depth,num_class,pretrained=True):
+    def __init__(self,conf):
         super(DenseNet, self).__init__()
-        basenet = eval('models.'+conf.netname)(pretrained=pretrained)
+        basenet = eval('models.'+conf.netname)(pretrained=conf.pretrained)
         self.feature = nn.Sequential(*list(basenet.children())[:-1])
         self.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         indim = dimdict[conf.netname]
-        self.classifier = nn.Linear(indim, num_class)
+        self.classifier = nn.Linear(indim, conf.num_class)
 
     def set_detach(self,isdetach):
         pass
@@ -55,4 +55,4 @@ class DenseNet(nn.Module):
 
 
 def get_net(conf):
-    return DenseNet(conf.depth, conf.num_class, conf.pretrained)
+    return DenseNet(conf)

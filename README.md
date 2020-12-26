@@ -10,7 +10,7 @@ PyTorch implementation of SnapMix | [paper](https://arxiv.org/abs/2012.04846)
 ```
 @inproceedings{huang2021snapmix,
     title={SnapMix: Semantically Proportional Mixing for Augmenting Fine-grained Data},
-    author={Shaoli Huang, Xinchao Wang, and Dacheng Dao},
+    author={Shaoli Huang, Xinchao Wang, and Dacheng Tao},
     year={2021},
     booktitle={AAAI Conference on Artificial Intelligence},
 }
